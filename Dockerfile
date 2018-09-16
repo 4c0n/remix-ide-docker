@@ -4,7 +4,7 @@ USER root
 
 RUN apt-get update && apt-get install -y npm git
 
-RUN npm install -g remix-ide
+RUN npm install -g remix-ide@0.6.4
 
 RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/remix-ide/node_modules/remixd/src/websocket.js
 
