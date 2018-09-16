@@ -2,13 +2,20 @@ FROM ubuntu:18.10
 
 USER root
 
-RUN apt-get update && apt-get install -y npm git
+RUN apt-get update && apt-get install -yqq curl git python build-essential
 
-RUN npm install -g remix-ide@0.6.4
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash && \
+    export NVM_DIR="$HOME/.nvm" && \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+    nvm install 10.10.0 && \
+    npm config set user 0 && \
+    npm config set unsafe-perm true && \
+    npm install remix-ide@0.6.4 -g
 
-RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/remix-ide/node_modules/remixd/src/websocket.js
+RUN sed -i s/127.0.0.1/0.0.0.0/g /root/.nvm/versions/node/v10.10.0/lib/node_modules/remix-ide/node_modules/remixd/src/websocket.js
 
-RUN sed -i s/127.0.0.1/0.0.0.0/g /usr/local/lib/node_modules/remix-ide/bin/remix-ide
+RUN sed -i s/127.0.0.1/0.0.0.0/g /root/.nvm/versions/node/v10.10.0/lib/node_modules/remix-ide/bin/remix-ide
 
 EXPOSE 8080
 EXPOSE 65520
