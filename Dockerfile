@@ -17,7 +17,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.s
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
     nvm install 10.10.0 && \
-    npm install remix-ide@0.7.2 -g && \
+    npm install remix-ide@0.7.3 -g && \
     sed -i s/"remixd.git"/"remixd.git#a0823a3ee222c0b444197c138441aad2087f6448"/g $HOME/.nvm/versions/node/v10.10.0/lib/node_modules/remix-ide/package.json && \
     cd $HOME/.nvm/versions/node/v10.10.0/lib/node_modules/remix-ide && \
     rm -rf node_modules && \
